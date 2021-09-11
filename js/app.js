@@ -35,11 +35,16 @@ function showFile(file){
     selectedFile.textContent ='No file selected';
     h2.textContent ='Drag And Drop Here';
     let fileType =file.type;
-    let validTypes =['image/jpeg','image/jpg','image/png'];
+    let validTypes =['image/jpeg','image/jpg','image/png','image/gif','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
     if(validTypes.includes(fileType)){
         let reader =new FileReader();
         reader.onload =() =>{
-            image.src =reader.result;
+            let url =reader.result;
+            if(fileType =='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
+                url ='img/xlsx.png';
+            }
+            image.src =url;
+            console.log(file);
             let filename =file.name;
             if(filename.length >16){
                 let firstcut ='';
